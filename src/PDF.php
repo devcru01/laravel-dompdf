@@ -224,7 +224,7 @@ class PDF
     }
 
     /** @param array<string> $pc */
-    public function setEncryption(string $password, string $ownerpassword = '', array $pc = []): void
+    public function setEncryption(string $password, string $ownerpassword = '', array $pc = [])
     {
         $this->render();
         $canvas = $this->dompdf->getCanvas();
@@ -232,6 +232,8 @@ class PDF
             throw new \RuntimeException('Encryption is only supported when using CPDF');
         }
         $canvas->get_cpdf()->setEncryption($password, $ownerpassword, $pc);
+
+        return $this;
     }
 
     protected function convertEntities(string $subject): string
